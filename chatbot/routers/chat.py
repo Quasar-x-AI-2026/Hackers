@@ -1,12 +1,12 @@
 # from fastapi import APIRouter
 # from pydantic import BaseModel
 
-# from backend.core.llm import get_llm
+# from chatbot.core.llm import get_llm
 
-# from backend.agents.severity_agent import detect_severity
-# from backend.core.specialist_mapper import map_specialist
-# from backend.tools.doctor_tool import fetch_doctors_by_speciality
-# from backend.agents.appointment_agent import get_appointment_agent
+# from chatbot.agents.severity_agent import detect_severity
+# from chatbot.core.specialist_mapper import map_specialist
+# from chatbot.tools.doctor_tool import fetch_doctors_by_speciality
+# from chatbot.agents.appointment_agent import get_appointment_agent
 
 # router = APIRouter()
 
@@ -70,11 +70,11 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from backend.core.llm import get_llm
-from backend.agents.severity_agent import detect_severity
-from backend.core.specialist_mapper import map_specialist
-from backend.tools.doctor_tool import fetch_doctors_by_speciality
-from backend.agents.appointment_agent import get_appointment_agent
+from chatbot.core.llm import get_llm
+from chatbot.agents.severity_agent import detect_severity
+from chatbot.core.specialist_mapper import map_specialist
+from chatbot.tools.doctor_tool import fetch_doctors_by_speciality
+from chatbot.agents.appointment_agent import get_appointment_agent
 
 router = APIRouter()
 

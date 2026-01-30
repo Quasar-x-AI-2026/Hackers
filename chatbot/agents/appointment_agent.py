@@ -4,8 +4,8 @@ from langchain_classic.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.tools import tool
 
-from backend.tools.doctor_tool import fetch_doctors_by_speciality
-from backend.tools.appointment_tool import book_appointment
+from chatbot.tools.doctor_tool import fetch_doctors_by_speciality
+from chatbot.tools.appointment_tool import book_appointment
 
 
 # ---------- TOOLS ----------

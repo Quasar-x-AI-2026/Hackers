@@ -1,4 +1,4 @@
-from backend.core.db import doctors_collection
+from chatbot.core.db import doctors_collection
 
 def recommend_doctors(specialist: str, location="Delhi", limit=3):
     cursor = doctors_collection.find(

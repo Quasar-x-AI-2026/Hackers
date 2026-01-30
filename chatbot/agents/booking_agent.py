@@ -1,4 +1,4 @@
-from backend.core.db import appointments_collection
+from chatbot.core.db import appointments_collection
 
 def book_appointment(doctor_name: str, patient_name="Patient"):
     appointment = {
