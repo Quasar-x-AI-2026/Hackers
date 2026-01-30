@@ -27,5 +27,7 @@ python-dotenv
 numpy
 scikit-learn
 
+pymongo
+
 uvicorn
 fastapi
