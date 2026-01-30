@@ -1,4 +1,4 @@
-from backend.core.db import doctors_collection
+from chatbot.core.db import doctors_collection
 
 def fetch_doctors_by_speciality(specialities):
     """
