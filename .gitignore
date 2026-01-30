@@ -1,3 +1,84 @@
+﻿# ================================
+# Dependencies
+# ================================
+node_modules/
+.npm/
+.pnpm/
+.yarn/
+.yarnrc
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ================================
+# Environment & Secrets
+# ================================
 .env
-import.txt
-venv
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+!.env.example
+
+# Secrets
+*.key
+*.pem
+*.crt
+*.cert
+id_rsa
+id_dsa
+
+# AWS
+*.aws
+credentials
+config
+
+# ================================
+# Build Outputs
+# ================================
+dist/
+build/
+.out/
+.next/
+public/build/
+.history/
+
+# ================================
+# IDE & Editor
+# ================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+*.code-workspace
+
+# ================================
+# OS & Temporary
+# ================================
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+*.log
+
+# ================================
+# Python
+# ================================
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+venv/
+env/
+
+# ================================
+# Database
+# ================================
+*.db
+*.sqlite
+*.sqlite3
