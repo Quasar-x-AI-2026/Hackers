@@ -3,6 +3,8 @@ langchain
 langchain-core
 langchain-community
 
+#uvicorn
+uvicorn
 
 # OpenAI Integration
 langchain-openai
