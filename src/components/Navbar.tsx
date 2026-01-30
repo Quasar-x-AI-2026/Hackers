@@ -29,21 +29,29 @@ export default function Navbar() {
             {[
               ["/", "Home"],
               ["/about-us", "About Us"],
-              ["/appointments", "Appointments"],
+              ["/book_appointment", "Book Appointment"],
               ["/chat_bot", "Chat Bot"],
               ["/prescriptions", "Prescriptions"],
               ["/dashboard", "Dashboard"],
-            ].map(([href, label]) => (
-              <NavigationMenuItem key={href}>
-                <NavigationMenuLink
-                  asChild
-                  className={navigationMenuTriggerStyle()}
-                >
-                  <Link href={href}>{label}</Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            ))}
+            ].map(([baseHref, label]) => {
+              const href =
+                label === "Dashboard" && session?.user?.role
+                  ? `${baseHref}/${session.user.role}`
+                  : baseHref;
+
+              return (
+                <NavigationMenuItem key={label}>
+                  <NavigationMenuLink
+                    asChild
+                    className={navigationMenuTriggerStyle()}
+                  >
+                    <Link href={href}>{label}</Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              );
+            })}
           </NavigationMenuList>
+
         </NavigationMenu>
 
         {!loading && session?.user?.role === "admin" && (

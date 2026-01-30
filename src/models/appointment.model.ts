@@ -1,26 +1,16 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export interface IPrescription extends Document {
-  appointment: Schema.Types.ObjectId;
+export interface IAppointment extends Document {
   patient: Schema.Types.ObjectId;
   doctor: Schema.Types.ObjectId;
-  medicines: {
-    name: string;
-    dosage: string;
-    duration: string;
-  }[];
-  notes: string;
+  appointmentDate: Date;
+  slotTime: string;
+  status: "scheduled" | "completed" | "cancelled";
+  paymentStatus: "pending" | "paid";
 }
 
-const prescriptionSchema = new Schema<IPrescription>(
+const appointmentSchema = new Schema<IAppointment>(
   {
-    appointment: {
-      type: Schema.Types.ObjectId,
-      ref: "Appointment",
-      required: true,
-      unique: true, // one prescription per appointment
-    },
-
     patient: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -33,18 +23,36 @@ const prescriptionSchema = new Schema<IPrescription>(
       required: true,
     },
 
-    medicines: [
-      {
-        name: String,
-        dosage: String,
-        duration: String,
-      },
-    ],
+    appointmentDate: {
+      type: Date,
+      required: true,
+    },
 
-    notes: String,
+    slotTime: {
+      type: String,
+      required: true,
+    },
+
+    status: {
+      type: String,
+      enum: ["scheduled", "completed", "cancelled"],
+      default: "scheduled",
+    },
+
+    paymentStatus: {
+      type: String,
+      enum: ["pending", "paid"],
+      default: "pending",
+    },
   },
   { timestamps: true }
 );
 
-export default mongoose.models.Prescription ||
-  mongoose.model<IPrescription>("Prescription", prescriptionSchema);
+appointmentSchema.index(
+  { doctor: 1, appointmentDate: 1, slotTime: 1 },
+  { unique: true }
+);
+
+export default mongoose.models.Appointment ||
+  mongoose.model<IAppointment>("Appointment", appointmentSchema);
+

@@ -11,11 +11,24 @@ export interface IPrescription extends Document {
   notes?: string;
 }
 
+
 const prescriptionSchema = new mongoose.Schema(
   {
     appointment: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Appointment",
+      required: true,
+    },
+
+    patient: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    doctor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
 
