@@ -28,22 +28,22 @@ const Navbar = () => {
       {/* Desktop menu */}
       <ul className="hidden md:flex items-start gap-5 font-medium">
         <li className="py-1">
-          <NavLink to="/" className={({ isActive }) => (isActive ? "border-b-2 border-[#5f6FFF]" : "")}>
+          <NavLink to="/" className={({ isActive }) => (isActive ? "border-b-2 border-[#F8607C]" : "")}>
             HOME
           </NavLink>
         </li>
         <li className="py-1">
-          <NavLink to="/doctors" className={({ isActive }) => (isActive ? "border-b-2 border-[#5f6FFF]" : "")}>
+          <NavLink to="/doctors" className={({ isActive }) => (isActive ? "border-b-2 border-[#F8607C]" : "")}>
             ALL DOCTORS
           </NavLink>
         </li>
         <li className="py-1">
-          <NavLink to="/about" className={({ isActive }) => (isActive ? "border-b-2 border-[#5f6FFF]" : "")}>
+          <NavLink to="/about" className={({ isActive }) => (isActive ? "border-b-2 border-[#F8607C]" : "")}>
             ABOUT
           </NavLink>
         </li>
         <li className="py-1">
-          <NavLink to="/contact" className={({ isActive }) => (isActive ? "border-b-2 border-[#5f6FFF]" : "")}>
+          <NavLink to="/contact" className={({ isActive }) => (isActive ? "border-b-2 border-[#F8607C]" : "")}>
             CONTACT
           </NavLink>
         </li>
@@ -87,7 +87,7 @@ const Navbar = () => {
         
           <button
             onClick={() => navigate("/login")}
-            className="bg-[#5f6FFF] rounded-full text-white px-8 py-3 font-light cursor-pointer hidden md:block"
+            className="bg-[#F8607C] rounded-full text-white px-8 py-3 font-light cursor-pointer hidden md:block"
           >
             Create Account
           </button>

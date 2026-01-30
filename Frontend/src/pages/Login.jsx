@@ -134,7 +134,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="bg-[#5f6FFF] text-white w-full py-2 my-2 rounded-md text-base"
+          className="bg-[#F8607C] text-white w-full py-2 my-2 rounded-md text-base"
         >
           {state === "Sign Up" ? "Create Account" : "Login"}
         </button>
@@ -144,7 +144,7 @@ const Login = () => {
             Already have an account?{" "}
             <span
               onClick={() => setState("Login")}
-              className="text-[#5f6FFF] underline cursor-pointer"
+              className="text-[#F8607C] underline cursor-pointer"
             >
               Login here
             </span>
@@ -154,7 +154,7 @@ const Login = () => {
             Create a new account?{" "}
             <span
               onClick={() => setState("Sign Up")}
-              className="text-[#5f6FFF] underline cursor-pointer"
+              className="text-[#F8607C] underline cursor-pointer"
             >
               Click here
             </span>

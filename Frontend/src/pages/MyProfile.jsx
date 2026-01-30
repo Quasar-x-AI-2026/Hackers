@@ -75,7 +75,7 @@ const MyProfile = () => {
         <p className="text-neutral-500 underline mt-3">CONTACT INFORMATION</p>
         <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700">
           <p className="font-medium">Email Id:</p>
-          <p className="text-blue-500">{userData.email}</p>
+          <p className="text-[#F8607C]">{userData.email}</p>
 
           <p className="font-medium">Phone:</p>
           {isEdit ? (
@@ -88,7 +88,7 @@ const MyProfile = () => {
               }
             />
           ) : (
-            <p className="text-blue-400">{userData.phone}</p>
+            <p className="text-[#F8607C]">{userData.phone}</p>
           )}
 
           <p className="font-medium">Address:</p>
@@ -166,14 +166,14 @@ const MyProfile = () => {
       <div className="mt-10">
         {isEdit ? (
           <button
-            className="border border-[#5f6FFF] px-8 py-2 rounded-full hover:bg-[#5f6FFF] hover:text-white transition-all cursor-pointer"
+            className="border border-[#F8607C] px-8 py-2 rounded-full hover:bg-[#F8607C] hover:text-white transition-all cursor-pointer"
             onClick={updateUserProfileData}
           >
             Save information
           </button>
         ) : (
           <button
-            className="border border-[#5f6FFF] px-8 py-2 rounded-full hover:bg-[#5f6FFF] hover:text-white transition-all cursor-pointer"
+            className="border border-[#F8607C] px-8 py-2 rounded-full hover:bg-[#F8607C] hover:text-white transition-all cursor-pointer"
             onClick={() => setIsEdit(true)}
           >
             Edit

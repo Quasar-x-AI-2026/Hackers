@@ -5,7 +5,7 @@ import header_img from '../assets/header_img.png'
 
 const Header = () => {
   return (
-    <div className='flex flex-col md:flex-row bg-[#5f6FFF] rounded-lg px-6 md:px-10 lg:px-20 overflow-hidden'>
+    <div className='flex flex-col md:flex-row bg-[#F8607C] rounded-lg px-6 md:px-10 lg:px-20 overflow-hidden'>
       {/* Left side - Content */}
       <div className='md:w-1/2 flex flex-col justify-center gap-4 py-10 md:py-0'>
         <p className='text-3xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight'>

@@ -191,7 +191,7 @@ const MyAppointments = () => {
               {!item.cancelled && !item.payment && !item.isCompleted && (
                 <button
                   onClick={() => handlePayment(item._id)}
-                  className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-[#5f6FFF] hover:text-white transition-all duration-300 cursor-pointer"
+                  className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-[#F8607C] hover:text-white transition-all duration-300 cursor-pointer"
                 >
                   Pay Online
                 </button>
