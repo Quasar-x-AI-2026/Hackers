@@ -1,14 +1,11 @@
-import Container from "@/components/container";
+import Container from "../components/container";
 import Image from "next/image";
+import LandingPage from "./(landing)/page";
 
 export default function Home() {
   return (
     <div>
-      <Container>
-        <div>
-          HACKERS
-        </div>
-      </Container>
+      <LandingPage />
     </div>
   );
 }
