@@ -2,6 +2,8 @@ import doctorModel from "../models/doctorModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointmentModel.js";
+import Appointment from "../models/appointmentModel.js";
+import Prescription from "../models/prescriptionModel.js";
 
 const changeAvailability = async (req, res) => {
   try {
@@ -170,6 +172,63 @@ const updateDoctorProfile = async (req, res) => {
   }
 };
 
+
+// API to add prescriptions
+// Doctor uploads prescription (JSON)
+
+const uploadPrescription = async (req, res) => {
+  try {
+    const {
+      appointmentId,
+      healthIssue,
+      medicines,
+      notes,
+      followUpDate,
+    } = req.body;
+
+    if (!appointmentId || !healthIssue || !medicines?.length) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required fields",
+      });
+    }
+
+    // 🔍 Find appointment
+    const appointment = await Appointment.findById(appointmentId);
+
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: "Appointment not found",
+      });
+    }
+
+    // ✅ Create prescription
+    const prescription = await Prescription.create({
+      patient: appointment.userId,   // ✅ FIX
+      doctor: req.docId,             // ✅ FIX (from authDoctor)
+      appointment: appointmentId,
+      healthIssue,
+      medicines,
+      notes,
+      followUpDate,
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "Prescription added successfully",
+      prescription,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
 export {
 
   changeAvailability,
@@ -180,5 +239,6 @@ export {
   appointmentCancel,
   doctorDashboard,
   doctorProfile,
-  updateDoctorProfile
+  updateDoctorProfile,
+  uploadPrescription
 };
