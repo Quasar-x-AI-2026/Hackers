@@ -34,7 +34,6 @@ id_dsa
 # AWS
 *.aws
 credentials
-config
 
 # ================================
 # Build Outputs
