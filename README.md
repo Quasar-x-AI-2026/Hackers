@@ -3,7 +3,8 @@
 A FastAPI + Langchain + MERN Stack based application that recommends doctors based on user symptoms.  
 This project combines a **FastAPI backend** for processing and recomendation with a ** frontend** for user interaction.
 
-##**Team Members Name**   
+##**Team Members Name**  
+
 Ayush Kumar Kushwaha (Team Leader)    
 Ashutosh Pandey      
 Arvind Yadav    
@@ -19,7 +20,7 @@ hackers/ ├── chatbot/                # FastAPI backend │   ├── mai
 Clone the repository and set up your environment:
 
 ```bash
-git clone https://github.com/your-username/doctor-recommendation.git
+git clone https://github.com/Quasar-x-AI-2026/Hackers.git/doctor-recommendation.git
 cd doctor-recommendation
 python -m venv venv
 venv\Scripts\activate   # Windows
@@ -37,6 +38,12 @@ uvicorn
 requests
 pydantic
 python-multipart
+
+##**Brief Description of Solution**
+
+This project is a full-stack AI-powered healthcare chatbot that performs initial symptom screening using natural language input. 
+It helps users understand the possible severity of their symptoms and suggests appropriate next steps before visiting a doctor. 
+The system aims to reduce unnecessary hospital visits and improve early medical guidance.
 
 ## License
 
