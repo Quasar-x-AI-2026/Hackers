@@ -45,6 +45,7 @@ This project is a full-stack AI-powered healthcare chatbot that performs initial
 It helps users understand the possible severity of their symptoms and suggests appropriate next steps before visiting a doctor. 
 The system aims to reduce unnecessary hospital visits and improve early medical guidance.
 
-## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+##**Demo link**
+
+https://hackers-4.onrender.com/docs
