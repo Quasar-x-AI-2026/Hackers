@@ -1,6 +1,6 @@
 import appointment_img from './appointment_img.png'
 import chatbot_icon from './chatbot-icon.png'
-import header_img from './header_img.png'
+import header_img from './header_img (2).png'
 import group_profiles from './group_profiles.png'
 import profile_pic from './profile_pic.png'
 import contact_image from './contact_image.png'
