@@ -19,7 +19,7 @@ const ChatBot = () => {
   const navigate = useNavigate();
 
   // Your API endpoints
-  const API_BASE_URL = "https://hackers-4.onrender.com";
+  const API_BASE_URL = "https://hackers-4.onrender.com/docs";
   const API_TEST_ENDPOINT = "/"; // GET endpoint
   const API_CHAT_ENDPOINT = "/chat"; // POST endpoint
 
@@ -61,67 +61,57 @@ const ChatBot = () => {
 
   // Call your LLM API - POST to /chat
   const callLLMAPI = async (userMessage) => {
-    setIsLoading(true);
+  setIsLoading(true);
 
-    try {
-      // Prepare request for your API - Adjust based on your API's expected format
-      const requestBody = {
-        // Try different formats based on what your API expects
-        message: userMessage,
-        // OR if your API expects a different field name:
-        // prompt: userMessage,
-        // query: userMessage,
-        // symptoms: userMessage,
-        
-        // Add any additional parameters your API might need
-        timestamp: new Date().toISOString(),
-        user_id: "user_" + Date.now(), // Temporary user ID
-      };
+  try {
+    // Match EXACT format from your API docs
+    const requestBody = {
+      symptoms: userMessage,  // Changed from "message" to "symptoms"
+      book: false,           // Added book field as shown in docs
+    };
 
-      console.log("Sending to /chat endpoint:", requestBody);
+    console.log("Sending to /chat endpoint:", requestBody);
 
-      // Make POST request to your /chat endpoint
-      const response = await axios.post(
-        `${API_BASE_URL}${API_CHAT_ENDPOINT}`,
-        requestBody,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            // Add if your API requires authentication:
-            // "Authorization": `Bearer YOUR_TOKEN`,
-            // "X-API-Key": "YOUR_KEY",
-          },
-          timeout: 45000, // 45 seconds timeout for LLM processing
-        }
-      );
-
-      console.log("API Response from /chat:", response.data);
-
-      // Process the API response
-      return processAPIResponse(response.data, userMessage);
-
-    } catch (error) {
-      console.error("API Error:", {
-        message: error.message,
-        status: error.response?.status,
-        data: error.response?.data,
-      });
-
-      // Show error to user
-      setMessages((prev) => [
-        ...prev.filter((msg) => !msg.typing),
-        {
-          text: "I'm having trouble connecting to the diagnosis service. Using mock data for demonstration...",
-          sender: "bot",
+    const response = await axios.post(
+      "https://hackers-4.onrender.com/chat",
+      requestBody,
+      {
+        headers: {
+          "Content-Type": "application/json",
         },
-      ]);
+        timeout: 45000,
+      }
+    );
 
-      // Fallback to mock data
-      return getMockDiagnosisData(userMessage);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    console.log("API Response:", response.data);
+    
+    // Process the response
+    const apiData = response.data;
+    
+    // Format the response to match what MedicalDiagnosisPage expects
+    return {
+      severity: apiData.severity || {
+        severity: "Moderate",
+        risk_reason: apiData.risk_reason || "AI analysis completed",
+        recommended_specialist: apiData.recommended_specialist || "General Physician"
+      },
+      recommended_specialists: apiData.recommended_specialist || "General Physician",
+      recommended_doctors: apiData.recommended_doctors || getMockDoctors(apiData.recommended_specialist),
+      booking_status: apiData.booking_status || "Ready for consultation",
+      date: apiData.date || Date.now(),
+      agent_action: {
+        input: `Patient symptoms: ${userMessage}`,
+        output: apiData.agent_action?.output || "Diagnosis analysis complete"
+      }
+    };
+
+  } catch (error) {
+    console.error("API Error:", error);
+    return getMockDiagnosisData(userMessage);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   // Process different API response formats
   const processAPIResponse = (apiData, originalSymptoms) => {
