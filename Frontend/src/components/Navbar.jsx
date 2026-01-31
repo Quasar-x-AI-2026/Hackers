@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
-import logo from "../assets/logo.svg";
+import logo from "../assets/logo.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { token, setToken, userData } = useContext(AppContext);  
+  const { token, setToken, userData } = useContext(AppContext);
   const [showMenu, setShowMenu] = useState(false);
 
   const logout = () => {
     setToken(null);
     localStorage.removeItem("token");
-    navigate("/"); 
+    navigate("/");
   };
 
   return (
@@ -20,7 +20,7 @@ const Navbar = () => {
       {/* Logo */}
       <img
         onClick={() => navigate("/")}
-        className="w-44 cursor-pointer"
+        className="w-60 h-8 cursor-pointer"
         src={logo}
         alt="Logo"
       />
@@ -28,23 +28,54 @@ const Navbar = () => {
       {/* Desktop menu */}
       <ul className="hidden md:flex items-start gap-5 font-medium">
         <li className="py-1">
-          <NavLink to="/" className={({ isActive }) => (isActive ? "border-b-2 border-[#F8607C]" : "")}>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "border-b-2 border-[#F8607C]" : ""
+            }
+          >
             HOME
           </NavLink>
         </li>
         <li className="py-1">
-          <NavLink to="/doctors" className={({ isActive }) => (isActive ? "border-b-2 border-[#F8607C]" : "")}>
+          <NavLink
+            to="/doctors"
+            className={({ isActive }) =>
+              isActive ? "border-b-2 border-[#F8607C]" : ""
+            }
+          >
             ALL DOCTORS
           </NavLink>
         </li>
         <li className="py-1">
-          <NavLink to="/about" className={({ isActive }) => (isActive ? "border-b-2 border-[#F8607C]" : "")}>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              isActive ? "border-b-2 border-[#F8607C]" : ""
+            }
+          >
             ABOUT
           </NavLink>
         </li>
         <li className="py-1">
-          <NavLink to="/contact" className={({ isActive }) => (isActive ? "border-b-2 border-[#F8607C]" : "")}>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              isActive ? "border-b-2 border-[#F8607C]" : ""
+            }
+          >
             CONTACT
+          </NavLink>
+        </li>
+        {/* DIAGNOSIS LINK ADDED HERE */}
+        <li className="py-1">
+          <NavLink
+            to="/diagnosis"
+            className={({ isActive }) =>
+              isActive ? "border-b-2 border-[#F8607C]" : ""
+            }
+          >
+            DIAGNOSIS
           </NavLink>
         </li>
       </ul>
@@ -52,11 +83,10 @@ const Navbar = () => {
       {/* Right side (auth / menu) */}
       <div className="flex items-center gap-4">
         {token && userData ? (
-          
           <div className="flex items-center gap-2 cursor-pointer group relative">
             <img
               className="w-8 h-8 rounded-full object-cover border"
-              src={userData.image || assets.profile_pic}  
+              src={userData.image || assets.profile_pic}
               alt="Profile"
             />
             <img className="w-2.5" src={assets.dropdown_icon} alt="Dropdown" />
@@ -74,17 +104,13 @@ const Navbar = () => {
                 >
                   My Appointments
                 </p>
-                <p
-                  onClick={logout}
-                  className="hover:text-black cursor-pointer"
-                >
+                <p onClick={logout} className="hover:text-black cursor-pointer">
                   Logout
                 </p>
               </div>
             </div>
           </div>
         ) : (
-        
           <button
             onClick={() => navigate("/login")}
             className="bg-[#F8607C] rounded-full text-white px-8 py-3 font-light cursor-pointer hidden md:block"
@@ -129,6 +155,10 @@ const Navbar = () => {
             </NavLink>
             <NavLink onClick={() => setShowMenu(false)} to="/contact">
               <p className="px-4 py-2 rounded inline-block">CONTACT</p>
+            </NavLink>
+            {/* DIAGNOSIS LINK ADDED HERE FOR MOBILE */}
+            <NavLink onClick={() => setShowMenu(false)} to="/diagnosis">
+              <p className="px-4 py-2 rounded inline-block">DIAGNOSIS</p>
             </NavLink>
           </ul>
         </div>
