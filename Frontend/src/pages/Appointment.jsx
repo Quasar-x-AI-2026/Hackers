@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
 import RelatedDoctors from "../components/RelatedDoctors";
@@ -8,6 +8,7 @@ import axios from "axios";
 
 const Appointment = () => {
   const { docId } = useParams();
+  const location = useLocation();
   const { doctors, currencySymbol, backendUrl, token, getDoctorsData, user } =
     useContext(AppContext);
 
@@ -21,8 +22,64 @@ const Appointment = () => {
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
   const fetchDocInfo = async () => {
-    const foundDoc = doctors.find((doc) => doc._id === docId);
-    setDocInfo(foundDoc);
+    try {
+      // FIRST: Check if doctor data came from navigation state (from MedicalDiagnosisPage)
+      if (location.state?.doctor) {
+        console.log("Using doctor data from navigation state:", location.state.doctor);
+        setDocInfo(location.state.doctor);
+        return;
+      }
+
+      // SECOND: Try to find in doctors array from context
+      const foundDoc = doctors.find((doc) => doc._id === docId);
+      
+      if (foundDoc) {
+        setDocInfo(foundDoc);
+      } else {
+        // THIRD: If not found, check if it's a mock doctor ID
+        if (docId.startsWith("mock_") || docId === "1" || docId === "2") {
+          // Try to get diagnosis data from localStorage
+          const savedData = localStorage.getItem("diagnosisData");
+          if (savedData) {
+            const diagnosisData = JSON.parse(savedData);
+            const specialty = diagnosisData.severity?.recommended_specialist || "General Physician";
+            
+            // Create a mock doctor object
+            const mockDoctor = {
+              _id: docId,
+              name: docId === "1" || docId === "mock_1" ? "Dr. Sarah Johnson" : "Dr. Michael Chen",
+              speciality: specialty,
+              degree: "MD, MBBS",
+              experience: "15+ years",
+              image: docId === "1" || docId === "mock_1" 
+                ? "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400"
+                : "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400",
+              available: true,
+              fees: docId === "1" || docId === "mock_1" ? 150 : 180,
+              about: `Specialized in ${specialty} with extensive experience in diagnosis and treatment.`,
+              address: { 
+                line1: docId === "1" || docId === "mock_1" ? "123 Medical Center" : "456 Health Plaza", 
+                city: "New York",
+                line2: "Suite 101",
+                state: "NY",
+                pincode: "10001"
+              }
+            };
+            
+            setDocInfo(mockDoctor);
+            return;
+          }
+        }
+        
+        // If still not found, show error and redirect
+        toast.error("Doctor not found. Please select a doctor from the list.");
+        navigate("/doctors");
+      }
+    } catch (error) {
+      console.error("Error fetching doctor:", error);
+      toast.error("Unable to load doctor details");
+      navigate("/doctors");
+    }
   };
 
   const getAvailableSlots = () => {
@@ -135,9 +192,10 @@ const Appointment = () => {
       toast.error(error.response?.data?.message || error.message);
     }
   };
+
   useEffect(() => {
     fetchDocInfo();
-  }, [doctors, docId]);
+  }, [doctors, docId, location.state]);
 
   useEffect(() => {
     if (docInfo) getAvailableSlots();

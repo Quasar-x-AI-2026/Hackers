@@ -32,7 +32,7 @@ const Footer = () => {
           <p className="text-xl font-medium mb-5">Get in Touch</p>
           <ul className="flex flex-col gap-2 text-gray-600">
             <li>+1-2122-4000</li>
-            <li>prescrepto@gmail.com</li>
+            <li>Meditrack@gmail.com</li>
           </ul>
         </div>
       </div>
@@ -41,7 +41,7 @@ const Footer = () => {
       <div>
         <hr />
         <p className="py-5 text-sm text-center">
-          Copyright 2025@ Prescripto - All Right Reserved
+          Copyright 2026@ Meditrack - All Right Reserved
         </p>
       </div>
     </div>

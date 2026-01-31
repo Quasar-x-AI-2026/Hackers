@@ -136,6 +136,37 @@ const MedicalDiagnosisPage = () => {
     return "Symptoms not specified";
   };
 
+  // Handle navigation to appointment page
+  const navigateToAppointment = (doctor, index) => {
+    // Create a complete doctor object with all required fields
+    const doctorData = {
+      _id: doctor._id || `mock_${index + 1}`,
+      name: doctor.name,
+      speciality: doctor.speciality,
+      degree: doctor.degree || "MD, MBBS",
+      experience: doctor.experience || "10+ years",
+      image: doctor.image || `https://ui-avatars.com/api/?name=${doctor.name}&background=F8607C&color=fff&size=400`,
+      available: doctor.available !== undefined ? doctor.available : true,
+      fees: doctor.fees || 150,
+      about: doctor.about || `Specialized in ${doctor.speciality} with extensive experience.`,
+      address: doctor.address || {
+        line1: "123 Medical Center",
+        line2: "Suite 101",
+        city: "New York",
+        state: "NY",
+        pincode: "10001"
+      }
+    };
+
+    // Navigate to appointment page with doctor data
+    navigate(`/appointment/${doctorData._id}`, {
+      state: { 
+        doctor: doctorData,
+        fromDiagnosis: true 
+      }
+    });
+  };
+
   // Loading state
   if (loading) {
     return (
@@ -757,9 +788,7 @@ const MedicalDiagnosisPage = () => {
                               color: "white",
                               boxShadow: `0 6px 20px ${primaryColor}40`,
                             }}
-                            onClick={() =>
-                              navigate(`/appointment/${doctor._id || index}`)
-                            }
+                            onClick={() => navigateToAppointment(doctor, index)}
                           >
                             {data.booking_status === "Appointment booked"
                               ? "View Appointment"
